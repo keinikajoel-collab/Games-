@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games by Kei · Playful Arcade</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0e1a;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #eef2ff;
+        }
+
+        /* main card – feels like a cozy game hub */
+        .game-hub {
+            max-width: 1200px;
+            width: 100%;
+            background: linear-gradient(145deg, #141b2b, #0e121f);
+            border-radius: 3rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.8), 
+                        0 0 0 1px rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(2px);
+        }
+
+        /* header section with a warm, personal touch */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.8rem;
+            gap: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .kei-badge {
+            background: #ffb347;
+            background: linear-gradient(135deg, #f9d56e, #f8b042);
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #121826;
+            box-shadow: 0 8px 0 #9b6b1f, 0 12px 20px -8px #ffb34780;
+            transform: rotate(3deg);
+            transition: transform 0.2s;
+        }
+
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(255, 200, 100, 0.3);
+        }
+
+        .logo-text .byline {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #a7b3d0;
+            letter-spacing: 0.4px;
+            margin-top: 4px;
+        }
+
+        .byline span {
+            background: #f9d56e20;
+            padding: 2px 8px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #ffd966;
+            border: 1px solid #ffd96640;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            font-weight: 500;
+            color: #b9c4e0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b9c4e0;
+            padding: 0.5rem 0.8rem;
+            border-radius: 40px;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #ffd966;
+            background: #ffffff0d;
+        }
+
+        /* featured / hero game strip */
+        .featured-game {
+            background: linear-gradient(120deg, #1e2a3a, #101a28);
+            border-radius: 2.5rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            border: 1px solid #ffffff12;
+            box-shadow: inset 0 1px 2px #ffffff08, 0 15px 20px -15px #000000;
+        }
+
+        .featured-info {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-icon {
+            font-size: 3.8rem;
+            filter: drop-shadow(0 8px 12px #00a3ff60);
+        }
+
+        .featured-text h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffe6a7;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+        }
+
+        .featured-text p {
+            color: #9aa9c7;
+            max-width: 350px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .play-now-btn {
+            background: #f9d56e;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0b0e1a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 0 #aa7c2c, 0 12px 20px -8px #f9d56e80;
+            cursor: pointer;
+            transition: all 0.08s ease;
+            letter-spacing: 0.3px;
+            border: 1px solid #ffe9a7;
+        }
+
+        .play-now-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #aa7c2c, 0 8px 18px -8px #f9d56e;
+        }
+
+        /* section title */
+        .section-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .section-title h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #ecf2ff;
+        }
+
+        .section-title span {
+            font-size: 0.9rem;
+            color: #f9d56e;
+            background: #f9d56e12;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #f9d56e30;
+        }
+
+        /* game grid — cards */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .game-card {
+            background: #1a2233;
+            background: linear-gradient(145deg, #1a2335, #121a28);
+            border-radius: 1.8rem;
+            padding: 1.6rem 1rem 1.3rem;
+            text-align: center;
+            border: 1px solid #ffffff0f;
+            box-shadow: 0 10px 20px -10px #00000080;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            border-color: #f9d56e60;
+            box-shadow: 0 20px 25px -12px #000000, 0 0 0 1px #f9d56e30;
+            background: linear-gradient(145deg, #1f2a40, #141d2e);
+        }
+
+        .game-emoji {
+            font-size: 3.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 6px 8px #00000050);
+        }
+
+        .game-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .game-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            background: #2e3a4e;
+            color: #b9c8e5;
+            border: 1px solid #ffffff12;
+        }
+
+        /* kei signature footer */
+        .footer-note {
+            text-align: center;
+            border-top: 1px solid #ffffff0d;
+            margin-top: 2.8rem;
+            padding-top: 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: #7b89a8;
+            font-size: 0.9rem;
+        }
+
+        .kei-heart {
+            color: #f9d56e;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .kei-heart span {
+            font-size: 1.2rem;
+            margin-right: 4px;
+        }
+
+        /* responsive tweaks */
+        @media (max-width: 650px) {
+            .game-hub {
+                padding: 1.8rem 1.2rem;
+                border-radius: 2rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.6rem;
+            }
+
+            .featured-game {
+                padding: 1.5rem;
+            }
+
+            .featured-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .play-now-btn {
+                padding: 0.7rem 1.6rem;
+                font-size: 1rem;
+            }
+
+            .game-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 1rem;
+            }
+
+            .game-emoji {
+                font-size: 2.8rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .game-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .featured-info {
+                gap: 1rem;
+            }
+
+            .featured-icon {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* little animation for the badge */
+        .kei-badge:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* custom scrollbar for a polished feel */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0b0e1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2e3a4e;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f9d56e60;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-hub">
+        <!-- Header with Kei branding -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="kei-badge">K</div>
+                <div class="logo-text">
+                    <h1>Games by Kei</h1>
+                    <div class="byline"><span>⚡ play · create · repeat</span></div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#">Arcade</a>
+                <a href="#">Puzzles</a>
+                <a href="#">About Kei</a>
+            </div>
+        </div>
+
+        <!-- Featured game (hero) -->
+        <div class="featured-game">
+            <div class="featured-info">
+                <div class="featured-icon">🎮</div>
+                <div class="featured-text">
+                    <h2>Kei's Comet Dash</h2>
+                    <p>Blast through neon asteroid fields — our most addictive space runner yet.</p>
+                </div>
+            </div>
+            <button class="play-now-btn">▶ PLAY NOW</button>
+        </div>
+
+        <!-- Game collection -->
+        <div class="section-title">
+            <h3>✨ Kei's game shelf</h3>
+            <span>6 games · new drops weekly</span>
+        </div>
+
+        <!-- Grid of games (cards) -->
+        <div class="game-grid">
+            <!-- game 1 -->
+            <div class="game-card">
+                <div class="game-emoji">🧩</div>
+                <h4>Pixel Puzzler</h4>
+                <div class="game-tag">logic</div>
+            </div>
+            <!-- game 2 -->
+            <div class="game-card">
+                <div class="game-emoji">🐍</div>
+                <h4>Neon Serpent</h4>
+                <div class="game-tag">arcade</div>
+            </div>
+            <!-- game 3 -->
+            <div class="game-card">
+                <div class="game-emoji">🏓</div>
+                <h4>Kei Pong</h4>
+                <div class="game-tag">retro</div>
+            </div>
+            <!-- game 4 -->
+            <div class="game-card">
+                <div class="game-emoji">🚀</div>
+                <h4>Star Lander</h4>
+                <div class="game-tag">skill</div>
+            </div>
+            <!-- game 5 -->
+            <div class="game-card">
+                <div class="game-emoji">⚔️</div>
+                <h4>Dungeon Kei</h4>
+                <div class="game-tag">rpg</div>
+            </div>
+            <!-- game 6 -->
+            <div class="game-card">
+                <div class="game-emoji">🎲</div>
+                <h4>Lucky Dice</h4>
+                <div class="game-tag">casual</div>
+            </div>
+        </div>
+
+        <!-- footer with a warm Kei signature -->
+        <div class="footer-note">
+            <div class="kei-heart"><span>❤️</span> made with love by Kei</div>
+            <div>© 2025 · all games crafted in-house</div>
+        </div>
+    </div>
+</body>
+</html>
